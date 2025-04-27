@@ -1,15 +1,20 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.etnatker.xhcodetools</id>
+    <id>com.xhsoft.plugins.utils</id>
     <name>XhCodeTools</name>
     <vendor>etnatker</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.java</depends>
 
-    <resource-bundle>messages.MyBundle</resource-bundle>
+    <resource-bundle>messages.messages</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.etnatker.xhcodetools.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
-        <postStartupActivity implementation="com.github.etnatker.xhcodetools.startup.MyProjectActivity" />
     </extensions>
+
+    <actions>
+        <action id="GenerateService" class="com.xhsoft.plugins.utils.GenerateServiceAction">
+            <add-to-group group-id="GenerateGroup" anchor="last"/>
+        </action>
+    </actions>
 </idea-plugin>

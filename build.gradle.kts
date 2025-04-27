@@ -87,9 +87,9 @@ intellijPlatform {
     }
 
     signing {
-        certificateChain = providers.environmentVariable("CERTIFICATE_CHAIN")
-        privateKey = providers.environmentVariable("PRIVATE_KEY")
-        password = providers.environmentVariable("PRIVATE_KEY_PASSWORD")
+        privateKeyFile = file("C:\\Users\\adson\\.ssh\\xhpriv\\private.pem")
+        certificateChainFile = file("C:\\Users\\adson\\.ssh\\xhpriv\\chain.crt")
+        password = providers.environmentVariable("XH_PRIVATE_KEY_PASSWORD")
     }
 
     publishing {
