@@ -16,14 +16,22 @@ class GenerateServiceAction : AnAction() {
         val beanPackage = psiFile.packageName
         val beanName = psiClass.name ?: return
         val baseName = psiClass.name?.removeSuffix("Bean") ?: return
+        var subfolder: String
+
+        val subfolderDialog = SubfolderDialog()
+        if (subfolderDialog.showAndGet()) {
+            subfolder = subfolderDialog.subfolder
+        } else {
+            return
+        }
 
         // 目标包路径
-        val servicePackage = "com.xhsoft.base.service"
-        val serviceDir = "xhsoft-base/src/main/java/com/xhsoft/base/service"
+        val servicePackage = "com.xhsoft.base.service"  + if (subfolder.isNotEmpty()) ".$subfolder" else ""
+        val serviceDir = "xhsoft-base/src/main/java/com/xhsoft/base/service" + if (subfolder.isNotEmpty()) "/$subfolder" else ""
         val implPackage = "$servicePackage.impl"
         val implDir = "$serviceDir/impl"
-        val daoPackage = "com.xhsoft.base.dao"
-        val daoDir = "xhsoft-base/src/main/java/com/xhsoft/base/dao"
+        val daoPackage = "com.xhsoft.base.dao" + if (subfolder.isNotEmpty()) ".$subfolder" else ""
+        val daoDir = "xhsoft-base/src/main/java/com/xhsoft/base/dao" + if (subfolder.isNotEmpty()) "/$subfolder" else ""
 
         FileUtils.createFile(
             project = project,
