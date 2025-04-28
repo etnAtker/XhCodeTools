@@ -40,9 +40,15 @@ class FileUtils {
             for (d in dir.split("/")) {
                 var subDir = currentDir.findSubdirectory(d)
                 if (subDir == null) {
-                    subDir = currentDir.createSubdirectory(d)
+                    WriteCommandAction.runWriteCommandAction(project) {
+                        subDir = currentDir.createSubdirectory(d)
+                    }
                 }
-                currentDir = subDir
+                if (subDir != null) {
+                    currentDir = subDir
+                } else {
+                    throw Exception("Create package directory failed.")
+                }
             }
             return currentDir
         }
