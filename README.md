@@ -4,7 +4,10 @@
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
 
 <!-- Plugin description -->
+A bundled plugin for the Xhsoft java library.
+
 星汉网络基础框架配套插件，目前功能：
+
 - 自动生成实体类对应的CRUD service和DAO类
 <!-- Plugin description end -->
 
