@@ -31,13 +31,24 @@ class FileUtils {
         }
 
         private fun createPackageDirectory(project: Project, dir: String): PsiDirectory? {
+            val dirSeq = dir.split("/")
+
+            if (dirSeq.isEmpty()) {
+                throw Exception("Target directory is unspecified.")
+            }
+
             val root = ProjectRootManager.getInstance(project)
                 .contentRoots
-                .firstOrNull() ?: return null
+                .find { it.name == dirSeq[0] }
+
+            if (root == null) {
+                throw Exception("Cannot find root: $dir")
+            }
 
             var currentDir = PsiManager.getInstance(project).findDirectory(root) ?: return null
 
-            for (d in dir.split("/")) {
+            for (i in 1..dirSeq.lastIndex) {
+                val d = dirSeq[i]
                 var subDir = currentDir.findSubdirectory(d)
                 if (subDir == null) {
                     WriteCommandAction.runWriteCommandAction(project) {
