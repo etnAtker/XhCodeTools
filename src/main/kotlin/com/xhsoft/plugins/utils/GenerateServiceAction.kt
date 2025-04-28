@@ -50,7 +50,15 @@ class GenerateServiceAction : AnAction() {
                 import com.xhsoft.lib.ext.mvc.AbstractCrudService;
                 import $servicePackage.I${baseName}Service;
                 import $beanPackage.$beanName;
+                import lombok.extern.slf4j.Slf4j;
+                import lombok.RequiredArgsConstructor;
+                import org.springframework.stereotype.Service;
+                import org.springframework.transaction.annotation.Transactional;
                 
+                @Slf4j
+                @Service
+                @RequiredArgsConstructor
+                @Transactional(readOnly = true)
                 public class ${baseName}Service extends AbstractCrudService<${beanName}> 
                     implements I${baseName}Service
                 {
@@ -67,7 +75,9 @@ class GenerateServiceAction : AnAction() {
                 
                 import com.xhsoft.lib.ext.mvc.AbstractCrudDao;
                 import $beanPackage.$beanName;
+                import org.springframework.stereotype.Repository;
                 
+                @Repository
                 public class ${baseName}Dao extends AbstractCrudDao<${beanName}> {
                 }
             """
