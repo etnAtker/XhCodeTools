@@ -30,7 +30,7 @@ class FileUtils {
             }
         }
 
-        fun createPackageDirectory(project: Project, dir: String): PsiDirectory? {
+        private fun createPackageDirectory(project: Project, dir: String): PsiDirectory? {
             val root = ProjectRootManager.getInstance(project)
                 .contentRoots
                 .firstOrNull() ?: return null
