@@ -9,6 +9,7 @@ A bundled plugin for the Xhsoft java library.
 星汉网络基础框架配套插件，目前功能：
 
 - 自动生成实体类对应的CRUD service和DAO类
+- 自动抽取实体类字段组成View
 <!-- Plugin description end -->
 
 ---

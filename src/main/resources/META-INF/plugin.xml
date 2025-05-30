@@ -13,11 +13,13 @@
     Key features include:
     <ul>
       <li>Automatic generation of CRUD service and DAO classes based on entity definitions</li>
+      <li>Automatic generation of view classes based on entities selected</li>
     </ul>
 
     星汉网络基础框架配套插件，目前功能：
     <ul>
       <li>自动生成实体类对应的CRUD service和DAO类</li>
+      <li>自动抽取实体类字段组成View</li>
     </ul>
     ]]></description>
 
@@ -28,6 +30,9 @@
 
     <actions>
         <action id="GenerateService" class="com.xhsoft.plugins.utils.GenerateServiceAction">
+            <add-to-group group-id="GenerateGroup" anchor="last"/>
+        </action>
+        <action id="GenerateView" class="com.xhsoft.plugins.utils.GenerateViewAction">
             <add-to-group group-id="GenerateGroup" anchor="last"/>
         </action>
     </actions>
