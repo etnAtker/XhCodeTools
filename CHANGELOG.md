@@ -22,5 +22,5 @@
 - Add CRUD service and DAO generator.
 
 [Unreleased]: https://github.com/etnAtker/XhCodeTools/compare/v0.2.0-beta.1...HEAD
-[0.2.0-beta.1]: https://github.com/etnAtker/XhCodeTools/compare/v0.2.0...v0.2.0-beta.1
+[0.2.0-beta.1]: https://github.com/etnAtker/XhCodeTools/compare/v0.1.0...v0.2.0-beta.1
 [0.1.0]: https://github.com/etnAtker/XhCodeTools/commits/v0.1.0
