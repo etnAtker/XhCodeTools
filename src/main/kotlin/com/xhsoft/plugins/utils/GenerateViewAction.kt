@@ -233,7 +233,7 @@ class GenerateViewAction : AnAction() {
 
         fun constantDeclarations(): String {
             constantMap.map { (key, value) ->
-                "private static final String $value = \"$key\";"
+                "public static final String $value = \"$key\";"
             }.joinToString("\n").let {
                 return if (it.isEmpty()) "" else "\n\n$it"
             }
