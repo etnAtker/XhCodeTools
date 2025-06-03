@@ -130,7 +130,6 @@ tasks {
     }
 
     publishPlugin {
-        dependsOn(patchChangelog)
     }
 }
 
