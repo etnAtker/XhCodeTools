@@ -24,7 +24,7 @@ class GenerateViewAction : AnAction() {
             null
         }
 
-        // Find all bean classes in the specified directory with progress indicator
+        // Find all bean classes in the specified directory with a progress indicator
         var beanClasses = listOf<PsiClass>()
         ProgressManager.getInstance().run(object : Task.Modal(
             project, MessagesBundle.message("dialog.generateview.progress.title"), false
@@ -80,7 +80,7 @@ class GenerateViewAction : AnAction() {
             return
         }
 
-        // Show dialog for subfolder and filename
+        // Show a dialog for subfolder and filename
         val fileInfoDialog = ViewFileInfoDialog(selectedClassNames, currentClassName)
         if (!fileInfoDialog.showAndGet()) {
             return
@@ -197,7 +197,7 @@ class GenerateViewAction : AnAction() {
             field.psiField?.let { psiField ->
                 val psiType = psiField.type
 
-                // Check if type is a class (not primitive or java.lang.*)
+                // Check if the type is a class (not primitive or java.lang.*)
                 if (needsImport(psiType)) {
                     // Add import for the type
                     val canonicalText = psiType.canonicalText
@@ -219,21 +219,45 @@ class GenerateViewAction : AnAction() {
             }
         }
 
+        val constantMap = mutableMapOf<String, String>()
+        fun toConstant(beanName: String): String {
+            val joinName = "join$beanName"
+            if (constantMap.containsKey(joinName)) {
+                return constantMap[joinName]!!
+            }
+
+            val constantName = beanName.camelToUpperUnderline()
+            constantMap[joinName] = constantName
+            return constantName
+        }
+
+        fun constantDeclarations(): String {
+            constantMap.map { (key, value) ->
+                "private static final String $value = \"$key\";"
+            }.joinToString("\n").let {
+                return if (it.isEmpty()) "" else "\n\n$it"
+            }
+        }
+
         // Generate fields with proper naming
         val fieldDefinitions = fields.joinToString("\n\n") { field ->
             // Convert class name (remove "Bean" suffix)
             val realClassName = field.className.removeSuffix("Bean")
+            val fieldPrefix = realClassName.decapitalize()
 
             // Determine if this field belongs to the main class
             val isMainClassField = mainClass != null && mainClass.contains(field.className)
 
-            // Create new field name based on whether it's from the main class or not
-            val newFieldName = if (isMainClassField && autoGenerateSelect) {
-                // For main class fields, keep the original name
+            // Create a new field name based on whether it's from the main class or not
+            val newFieldName = if (
+                (isMainClassField && autoGenerateSelect)
+                || field.fieldName.startsWith(fieldPrefix)
+            ) {
+                // For main class fields or already have a right prefix, keep the original name
                 field.fieldName
             } else {
                 // For other classes, prefix with class name
-                realClassName.decapitalize() + field.fieldName.replaceFirstChar { it.uppercase() }
+                fieldPrefix + field.fieldName.replaceFirstChar { it.uppercase() }
             }
 
             // Find @Schema annotation if present
@@ -247,12 +271,11 @@ class GenerateViewAction : AnAction() {
             // Add @Select annotation if auto-generate is enabled
             if (autoGenerateSelect) {
                 if (isMainClassField) {
-                    // For main class fields, just add @Select
+                    // For main class fields, add @Select
                     annotations.add("@Select")
                 } else {
                     // For other class fields, add @Select with name and from attributes
-                    val joinName = "join$realClassName"
-                    annotations.add("@Select(name = \"${field.fieldName}\", from = \"$joinName\")")
+                    annotations.add("@Select(name = \"${field.fieldName}\", from = ${toConstant(realClassName)})")
                 }
             }
 
@@ -267,7 +290,7 @@ class GenerateViewAction : AnAction() {
             ${imports.joinToString("\n")}
 
             @Data
-            public class $filename {
+            public class $filename {${constantDeclarations()}
 
             $fieldDefinitions
 
@@ -296,5 +319,18 @@ class GenerateViewAction : AnAction() {
     private fun String.decapitalize(): String {
         if (isEmpty() || !first().isUpperCase()) return this
         return first().lowercase() + substring(1)
+    }
+
+    fun String.camelToUpperUnderline(): String {
+        val words = mutableListOf<String>()
+        var st = 0
+        this.forEachIndexed { index, c ->
+            if (c.isUpperCase() && index > 0) {
+                words.add(this.substring(st, index))
+                st = index
+            }
+        }
+        words.add(this.substring(st))
+        return words.joinToString("_").uppercase()
     }
 }
