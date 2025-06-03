@@ -75,7 +75,7 @@ class ViewFileInfoDialog(
                     .comment(MessagesBundle.message("dialog.generateview.subfolder.comment"))
             }
 
-            // Add auto-generate Select annotation checkbox
+            // Add the auto-generate Select annotation checkbox
             row {
                 autoGenerateSelectCheckbox = checkBox(MessagesBundle.message("dialog.generateview.autogenerate.checkbox"))
                     .bindSelected({ autoGenerateSelect }, { autoGenerateSelect = it })
@@ -83,7 +83,7 @@ class ViewFileInfoDialog(
                     .align(Align.FILL)
             }
 
-            // Add main class dropdown (only visible when checkbox is checked)
+            // Add the main class dropdown (only visible when the checkbox is checked)
             row {
                 cell(JBLabel(MessagesBundle.message("dialog.generateview.mainclass.prompt")).apply {
                     font = JBUI.Fonts.label()
