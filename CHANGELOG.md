@@ -2,7 +2,9 @@
 
 # XhCodeTools Changelog
 
-## [Unreleased]
+## [0.3.0] - 2025-08-22
+
+- Add response document classes doc generator.
 
 ## [0.2.2] - 2025-06-04
 
