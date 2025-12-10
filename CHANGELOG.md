@@ -2,6 +2,10 @@
 
 # XhCodeTools Changelog
 
+## [0.3.1] - 2025-12-10
+
+- Add 253.* support.
+
 ## [0.3.0] - 2025-08-22
 
 - Add response document classes doc generator.
