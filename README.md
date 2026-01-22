@@ -10,6 +10,8 @@ A bundled plugin for the Xhsoft java library.
 
 - 自动生成实体类对应的CRUD service和DAO类
 - 自动抽取实体类字段组成View
+- 自动生成响应文档类，支持多种模板选择
+- 自动生成测试用例框架
 <!-- Plugin description end -->
 
 ---

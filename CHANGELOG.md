@@ -2,6 +2,10 @@
 
 # XhCodeTools Changelog
 
+## [0.4.0] - 2026-01-22
+
+- Add Test Case generator.
+
 ## [0.3.1] - 2025-12-10
 
 - Add 253.* support.
