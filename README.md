@@ -1,7 +1,7 @@
 # XhCodeTools
 
-[![Version](https://img.shields.io/jetbrains/plugin/v/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
-[![Downloads](https://img.shields.io/jetbrains/plugin/d/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
+[![Version](https://img.shields.io/jetbrains/plugin/v/27212-xhcodetools.svg)](https://plugins.jetbrains.com/plugin/27212-xhcodetools)
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/27212-xhcodetools.svg)](https://plugins.jetbrains.com/plugin/27212-xhcodetools)
 
 <!-- Plugin description -->
 A bundled plugin for the Xhsoft java library.
