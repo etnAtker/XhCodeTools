@@ -2,6 +2,10 @@
 
 # XhCodeTools Changelog
 
+## [0.4.1] - 2025-04-08
+
+- Remove the `until-build` version constraint.
+
 ## [0.4.0] - 2026-01-22
 
 - Add Test Case generator.

@@ -32,7 +32,7 @@ class GenerateViewAction : AnAction() {
             override fun run(indicator: ProgressIndicator) {
                 indicator.text = MessagesBundle.message("dialog.generateview.progress.scanning")
                 indicator.isIndeterminate = true
-                ReadAction.run<Throwable> {
+                ReadAction.runBlocking<Throwable> {
                     beanClasses = findBeanClasses(project)
                 }
             }
