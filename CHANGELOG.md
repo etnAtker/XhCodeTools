@@ -2,6 +2,10 @@
 
 # XhCodeTools Changelog
 
+## [0.4.2] - 2025-04-08
+
+- Migrate away from the deprecated API.
+
 ## [0.4.1] - 2025-04-08
 
 - Remove the `until-build` version constraint.
